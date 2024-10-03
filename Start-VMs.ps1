@@ -8,6 +8,7 @@ param(
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false -Scope User
 
 # Connect to the vCenter Server using the provided credentials
+Write-Host "Connecting to vCenter Server: $vCenterServer"
 Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPass
 
 # List of VMs to start
@@ -18,19 +19,25 @@ $vmList = @(
 
 # Loop through each VM name and start the VM if found
 foreach ($vmName in $vmList) {
-    try {
-        $vm = Get-VM -Name $vmName
-        if ($vm -ne $null) {
-            Write-Host "Starting VM: $vmName"
-            Start-VM -VM $vm -Confirm:$false
-            Write-Host "VM '$vmName' started successfully."
-        } else {
-            Write-Host "VM not found: $vmName"
+    Write-Host "Processing VM name: '$vmName'"
+    if (-not [string]::IsNullOrWhiteSpace($vmName)) {
+        try {
+            Write-Host "Attempting to get VM '$vmName'..."
+            $vm = Get-VM -Name $vmName -ErrorAction Stop
+
+            if ($vm) {
+                Write-Host "Starting VM: $vmName"
+                Start-VM -VM $vm -Confirm:$false -Verbose
+                Write-Host "VM '$vmName' started successfully."
+            }
+        } catch {
+            Write-Host "Error processing VM '$vmName': $_"
         }
-    } catch {
-        Write-Host "Error processing VM: $vmName. Error: $_"
+    } else {
+        Write-Host "Skipped an empty or invalid VM name."
     }
 }
 
 # Disconnect from the vCenter Server after operations
+Write-Host "Disconnecting from the vCenter Server..."
 Disconnect-VIServer -Server $vCenterServer -Confirm:$false
