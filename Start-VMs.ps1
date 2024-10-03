@@ -8,6 +8,9 @@ param (
 # Import VMware PowerCLI
 Import-Module VMware.PowerCLI
 
+# Ignore SSL Certificate Errors
+Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
+
 # Connect to the vCenter Server
 Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPass
 
