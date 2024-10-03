@@ -5,6 +5,9 @@ param (
     [string[]]$VMNameList
 )
 
+# Convert the comma-separated VM names to an array
+$VMNamesArray = $VMNameList -split ','
+
 # Import VMware PowerCLI
 Import-Module VMware.PowerCLI
 
