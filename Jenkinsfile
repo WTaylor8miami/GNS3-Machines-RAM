@@ -42,7 +42,7 @@ pipeline {
                 }
             }
         }
-        stage('Restart VMs') {
+        stage('Start VMs') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: env.VCENTER_CREDENTIALS_ID, usernameVariable: 'VCENTER_USER', passwordVariable: 'VCENTER_PASS')]) {
@@ -50,8 +50,9 @@ pipeline {
                         docker run --rm \
                             -e VCENTER_USER=\$VCENTER_USER \
                             -e VCENTER_PASS=\$VCENTER_PASS \
+                            -e VM_NAME_LIST=${env.VM_NAMES} \
                             ${env.DOCKER_IMAGE_NAME}:${env.DOCKER_IMAGE_TAG} \
-                            pwsh -File /usr/src/app/Restart-VMs.ps1 -vCenterServer 'vcenter.regional.miamioh.edu' -vCenterUser \$VCENTER_USER -vCenterPass \$VCENTER_PASS
+                            pwsh -File /usr/src/app/Start-VMs.ps1 -vCenterServer 'vcenter.regional.miamioh.edu' -vCenterUser \$VCENTER_USER -vCenterPass \$VCENTER_PASS -VMNameList ${env.VM_NAMES}
                         """
                     }
                 }
