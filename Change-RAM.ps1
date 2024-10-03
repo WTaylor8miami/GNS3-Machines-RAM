@@ -12,7 +12,7 @@ Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPas
 
 # List of VM names
 $vmNames = @(
-            "386-00")  # Replace with actual VM names
+            "386-00", "386-01")  # Replace with actual VM names
 
 foreach ($vmName in $vmNames) {
     $vm = Get-VM -Name $vmName
