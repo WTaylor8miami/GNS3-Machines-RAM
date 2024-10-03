@@ -1,20 +1,20 @@
 param (
     [string]$vCenterServer,
     [string]$vCenterUser,
-    [string]$vCenterPass
+    [string]$vCenterPass,
+    [string[]]$VMNameList
 )
 
 # Import VMware PowerCLI
 Import-Module VMware.PowerCLI
 
+# Ignore SSL Certificate Errors
+Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
+
 # Connect to the vCenter Server
 Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPass
 
-# List of VM names
-$vmNames = @(
-            "386-00", "386-01")  # Replace with actual VM names
-
-foreach ($vmName in $vmNames) {
+foreach ($vmName in $VMNameList) {
     $vm = Get-VM -Name $vmName
     if ($vm) {
         # Set RAM to 96GB (which is 98304 MB)
