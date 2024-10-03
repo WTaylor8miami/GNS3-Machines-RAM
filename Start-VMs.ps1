@@ -2,8 +2,11 @@ param (
     [string]$vCenterServer,
     [string]$vCenterUser,
     [string]$vCenterPass,
-    [string[]]$VMNameList
+    [string]$VMNameList
 )
+
+# Convert the comma-separated VM names to an array
+$VMNamesArray = $VMNameList -split ','
 
 # Import VMware PowerCLI
 Import-Module VMware.PowerCLI
@@ -14,8 +17,8 @@ Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
 # Connect to the vCenter Server
 Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPass
 
-foreach ($vmName in $VMNameList) {
-    $vm = Get-VM -Name $vmName
+foreach ($vmName in $VMNamesArray) {
+    $vm = Get-VM -Name $vmName.Trim()
     if ($vm) {
         Start-VM -VM $vm -Confirm:$false
         Write-Output "VM '$vmName' started successfully."
