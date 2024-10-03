@@ -16,3 +16,4 @@ RUN pwsh -c "Install-Module -Name VMware.PowerCLI -Scope AllUsers -Force -AllowC
 
 # Copy the PowerShell script files into the Docker image
 COPY Change-RAM.ps1 /usr/src/app/
+COPY Start-VMs.ps1 /usr/src/app/
