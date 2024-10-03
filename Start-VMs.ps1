@@ -1,6 +1,6 @@
 # Define the list of VMs to be started
 $vmList = @(
-            "386-00", "386-01"
+   "386-00", "386-01"
 )
 
 param (
