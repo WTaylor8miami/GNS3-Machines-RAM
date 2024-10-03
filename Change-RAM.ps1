@@ -11,7 +11,8 @@ Import-Module VMware.PowerCLI
 Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPass
 
 # List of VM names
-$vmNames = @("386-00", "VM2", "VM3")  # Replace with actual VM names
+$vmNames = @(
+            "386-00")  # Replace with actual VM names
 
 foreach ($vmName in $vmNames) {
     $vm = Get-VM -Name $vmName
