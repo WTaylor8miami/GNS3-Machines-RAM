@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMAGE_NAME = 'roseaw/powercliimage'
         DOCKER_IMAGE_TAG = 'latest'
         VCENTER_CREDENTIALS_ID = 'taylorw8-vsphere'
-        VM_NAMES = '386-00,VM2,VM3'  // Replace with actual VM names
+        VM_NAMES = '386-00,386-01,VM3'  // Replace with actual VM names
     }
 
     stages {
