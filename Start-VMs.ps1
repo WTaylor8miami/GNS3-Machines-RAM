@@ -13,13 +13,14 @@ Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPas
 
 # List of VMs to start
 $vmList = @(
-    "284-01", "284-02", "284-03", "284-04", "284-05", "284-06", "284-07", "284-08", "284-09", "284-10",
-    "284-11", "284-12", "284-13", "284-14", "284-15", "284-16", "284-17", "386-00", "386-01",
-    "358-01", "358-02", "358-03", "358-04", "358-05", "358-06", "358-07", "358-08", "358-09", "358-10",
-    "358-11", "358-12", "358-13", "358-14",
-    "281K-01", "281K-02", "281K-03", "281K-04", "281K-05",
-    "281-01", "281-02", "281-03", "281-04", "281-05", "281-06", "281-07", "281-08", "281-09", "281-10", 
-    "281-11", "281-12", "281-13", "281-14"
+"abbottrj-225", "alexanmf-225", "alhayen-225", "allame-225", "almafra-225", "bressmj-225", 
+"brownc61-225", "cairlsr-225", "careyjr-225", "chengrl-225", "chowk3-225", "clarkap2-225", 
+"colli369-225", "crockesm-225", "diallof2-225", "djandah-225", "frimmigm-225", "gaddiehl-225", 
+"garberr-225", "godboltn-225", "gonzalkb-225", "harri581-225", "knauwq-225", 
+"lawhorb-225", "leecf2-225", "lewisjp3-225", "maplesgl-225", "mcclela-225", "nguyenjm-225", 
+"parsonjt-225", "perezi3-225", "plaughlc-225", "pottsdj-225", "pyakurd-225", "pylerd-225", 
+"rimalgp-225", "samals-225", "stidhalt-225", "taylorw8-225", "wellsr2-225", "widenemg-225", 
+"woodwaj4-225"
 )
 
 # Loop through each VM name and start the VM if found
