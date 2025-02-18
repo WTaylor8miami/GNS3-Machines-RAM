@@ -26,6 +26,21 @@ pipeline {
                 }
             }
         }
+        stage('Shutdown VMs') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: env.VCENTER_CREDENTIALS_ID, usernameVariable: 'VCENTER_USER', passwordVariable: 'VCENTER_PASS')]) {
+                        sh """
+                        docker run --rm \
+                            -e VCENTER_USER=\$VCENTER_USER \
+                            -e VCENTER_PASS=\$VCENTER_PASS \
+                            ${env.DOCKER_IMAGE_NAME}:${env.DOCKER_IMAGE_TAG} \
+                            pwsh -File /usr/src/app/Shutdown-VMs.ps1 -vCenterServer '${env.VCENTER_SERVER}' -vCenterUser \$VCENTER_USER -vCenterPass \$VCENTER_PASS -Verbose
+                        """
+                    }
+                }
+            }
+        }
         stage('Change RAM for VMs') {
             steps {
                 script {
