@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMAGE_NAME = 'roseaw/powercliimage'
         DOCKER_IMAGE_TAG = 'latest'
         VCENTER_CREDENTIALS_ID = 'taylorw8-vsphere'
-        VCENTER_SERVER = 'vcenter.regional.miamioh.edu'
+        VCENTER_SERVER = 'cit-vc.regionals.miamioh.edu'
     }
 
     stages {
